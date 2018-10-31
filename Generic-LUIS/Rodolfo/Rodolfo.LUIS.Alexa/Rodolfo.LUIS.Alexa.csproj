@@ -9,8 +9,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Alexa.NET" Version="1.5.4" />
+    <PackageReference Include="Alexa.NET.Security.Middleware" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rodolfo.Cognitive\Rodolfo.Cognitive.csproj" />
+    <ProjectReference Include="..\Rodolfo.Domain\Rodolfo.Domain.csproj" />
   </ItemGroup>
 
 </Project>
