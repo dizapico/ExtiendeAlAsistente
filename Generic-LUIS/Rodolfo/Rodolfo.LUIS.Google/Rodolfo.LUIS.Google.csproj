@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationInsightsResourceId>/subscriptions/09a97f32-5ee4-4391-a40b-f8de68e958c5/resourcegroups/Rodolfo/providers/microsoft.insights/components/rodolfogoogle-ai</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/09a97f32-5ee4-4391-a40b-f8de68e958c5/resourcegroups/Rodolfo/providers/microsoft.insights/components/rodolfogoogle-ai</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Google.Cloud.Dialogflow.V2" Version="1.0.0-beta02" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
@@ -18,6 +21,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Rodolfo.Cognitive\Rodolfo.Cognitive.csproj" />
     <ProjectReference Include="..\Rodolfo.Domain\Rodolfo.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
