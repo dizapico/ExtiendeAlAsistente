@@ -7,8 +7,6 @@ namespace Rodolfo.Domain
 {
     public interface ITravel
     {
-        Task<string> GetVisitingPlaceAsync(string location);
-        Task<string> GetAllVisitingPlaceAsync();
-        Task<string> GetLastVisitingPlaceAsync();
+        Task<string> EvaluateQueryText(string queryText);
     }
 }

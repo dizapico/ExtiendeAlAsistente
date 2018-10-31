@@ -1,7 +1,9 @@
-﻿using Rodolfo.Domain.Models;
+﻿using Rodolfo.Cognitive;
+using Rodolfo.Domain.Models;
 using Rodolfo.Domain.Services;
 using System;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Rodolfo.Domain
@@ -9,13 +11,46 @@ namespace Rodolfo.Domain
     public class Travel : ITravel
     {
         private IStorageService storageService;
+        private readonly IIntentFinder intentFinder;
 
-        public Travel(IStorageService storageService)
+        public Travel(IStorageService storageService, IIntentFinder intentFinder)
         {
             this.storageService = storageService;
+            this.intentFinder = intentFinder;
         }
 
-        public async Task<string> GetVisitingPlaceAsync(string location)
+        public async Task<string> EvaluateQueryText(string queryText)
+        {
+            var intentResponse = await this.intentFinder.GetIntentAsync(queryText);
+
+            var speechText = new StringBuilder();
+            switch (intentResponse.Intent)
+            {
+                case "GetLastVisitingPlace":
+                    speechText.Append(await GetLastVisitingPlaceAsync());
+                    break;
+                case "GetAllVisitingPlace":
+                    speechText.Append(await GetAllVisitingPlaceAsync());
+                    break;
+                case "GetVisitingPlace":
+                    if (intentResponse.Entities.Count <= 0)
+                    {
+                        speechText.Append("No he podido encontrar ningún lugar que haya visitado Rodolfo. ");
+                    }
+                    else
+                    {
+                        speechText.Append(await GetVisitingPlaceAsync(intentResponse.Entities.FirstOrDefault().Name));
+                    }
+                    break;
+                default:
+                    speechText.Append("Rodolfo no parece que tenga ningún mensaje interesante que compartir con nosotros.");
+                    break;
+            }
+
+            return speechText.ToString();
+        }
+
+        private async Task<string> GetVisitingPlaceAsync(string location)
         {
             var messages = await storageService.GetAllAsync();
 
@@ -34,7 +69,7 @@ namespace Rodolfo.Domain
             return message;
         }
 
-        public async Task<string> GetAllVisitingPlaceAsync()
+        private async Task<string> GetAllVisitingPlaceAsync()
         {
             var messages = await storageService.GetAllAsync();
 
@@ -45,7 +80,7 @@ namespace Rodolfo.Domain
             return $"Rodolfo ha estado en {locations}";
         }
 
-        public async Task<string> GetLastVisitingPlaceAsync()
+        private async Task<string> GetLastVisitingPlaceAsync()
         {
             var messageEntity = await storageService.GetLastMessageAsync();
 

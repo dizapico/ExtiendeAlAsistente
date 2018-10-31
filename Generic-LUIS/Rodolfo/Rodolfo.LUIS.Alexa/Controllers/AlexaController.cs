@@ -16,13 +16,10 @@ namespace Rodolfo.LUIS.Alexa.Controllers
     [ApiController]
     public class AlexaController : ControllerBase
     {
-        public IIntentFinder IntentFinder { get; private set; }
-
         private ITravel travel;
 
-        public AlexaController(IIntentFinder intentFinder, ITravel travel)
+        public AlexaController(ITravel travel)
         {
-            this.IntentFinder = intentFinder;
             this.travel = travel;
         }
 
@@ -37,41 +34,15 @@ namespace Rodolfo.LUIS.Alexa.Controllers
                 var intentRequest = request.Request as IntentRequest;
                 var phrase = intentRequest.Intent.Slots["Search"].Value;
 
-                var intentResponse = await this.IntentFinder.GetIntentAsync(phrase);
-
-                var speechText = new StringBuilder();
-                switch (intentResponse.Intent)
-                {
-                    case "GetLastVisitingPlace":
-                        speechText.Append(await travel.GetLastVisitingPlaceAsync());
-                        break;
-                    case "GetAllVisitingPlace":
-                        speechText.Append(await travel.GetAllVisitingPlaceAsync());
-                        break;
-                    case "GetVisitingPlace":
-                        if (intentResponse.Entities.Count <= 0)
-                        {
-                            speechText.Append("No he podido encontrar ningún lugar que haya visitado Rodolfo. ");
-                        }
-                        else
-                        {
-                            speechText.Append(await travel.GetVisitingPlaceAsync(intentResponse.Entities.FirstOrDefault().Name));
-                        }
-                        break;
-                    default:
-                        speechText.Append("Rodolfo no parece que tenga ningún mensaje interesante que compartir con nosotros.");
-                        break;
-                }
-
-                var speechTextString = speechText.ToString();
+                var speechText = await this.travel.EvaluateQueryText(phrase);
 
                 return new SkillResponse
                 {
                     Version = "1.0",
                     Response = new ResponseBody
                     {
-                        OutputSpeech = new PlainTextOutputSpeech { Text = speechTextString },
-                        Card = new SimpleCard { Title = "Rodolfo Viajero", Content = speechTextString },
+                        OutputSpeech = new PlainTextOutputSpeech { Text = speechText },
+                        Card = new SimpleCard { Title = "Rodolfo Viajero", Content = speechText },
                         ShouldEndSession = true
                     }
                 };
