@@ -25,7 +25,12 @@ namespace Rodolfo.LUIS.Google.Controllers
             this.travel = travel;
         }
 
-        [Route("Conversation")]
+        public async Task<IActionResult> Test()
+        {
+            return Ok("Testing ok");
+        }
+
+        //[Route("Conversation")]
         [HttpPost]
         public async Task<IActionResult> Conversation()
         {
