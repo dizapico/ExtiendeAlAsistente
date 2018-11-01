@@ -67,7 +67,7 @@ namespace dialogflow.dotnet.DialogFlow.Intents.Vision
         // Create the CustomSearch client. Note this is not a cloud library.
         private static ImageSearchAPI CreateSearchClient()
         {
-            string subscriptionKey = "53a7931eb3204f049e803742c2ef1e4f";
+            string subscriptionKey = Program.AppSettings.Cognitive.ImageSearch;
 
             return new ImageSearchAPI(new ApiKeyServiceClientCredentials(subscriptionKey));
         }        

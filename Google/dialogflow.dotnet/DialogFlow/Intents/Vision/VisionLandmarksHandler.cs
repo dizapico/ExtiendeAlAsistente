@@ -23,7 +23,7 @@ namespace dialogflow.dotnet.DialogFlow.Intents.Vision
 
         public override async Task<WebhookResponse> HandleAsync(WebhookRequest req)
         {
-            var subscriptionKey = "a118244cf9c54d80bdfebe9a7626da4b";
+            var subscriptionKey = Program.AppSettings.Cognitive.ComputerVision;
             var computerVision = new ComputerVisionClient(new ApiKeyServiceClientCredentials(subscriptionKey), new System.Net.Http.DelegatingHandler[] { });
             computerVision.Endpoint = "https://westeurope.api.cognitive.microsoft.com";
 
