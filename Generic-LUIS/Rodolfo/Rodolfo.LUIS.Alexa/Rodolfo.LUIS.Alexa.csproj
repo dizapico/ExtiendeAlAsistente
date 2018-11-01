@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationInsightsResourceId>/subscriptions/09a97f32-5ee4-4391-a40b-f8de68e958c5/resourcegroups/Rodolfo/providers/microsoft.insights/components/rodolfoalexa-ai</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/09a97f32-5ee4-4391-a40b-f8de68e958c5/resourcegroups/Rodolfo/providers/microsoft.insights/components/rodolfoalexa-ai</ApplicationInsightsAnnotationResourceId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Alexa.NET" Version="1.5.4" />
+    <PackageReference Include="Alexa.NET.Security.Middleware" Version="1.0.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rodolfo.Cognitive\Rodolfo.Cognitive.csproj" />
+    <ProjectReference Include="..\Rodolfo.Domain\Rodolfo.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+</Project>

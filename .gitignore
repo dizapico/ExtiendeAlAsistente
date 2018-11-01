@@ -2,7 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/Alexa/Rodolfo.Alexa.Skills/Rodolfo.Alexa.Luis/appsettings.Development.json
+appsettings.Development.json
 /Alexa/Rodolfo.Alexa.Skills/Rodolfo.Alexa.Luis/Properties/PublishProfiles/rodolfoalexa - Web Deploy.pubxml
 
 ## Ignore Visual Studio temporary files, build results, and
