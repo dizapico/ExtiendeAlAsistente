@@ -270,3 +270,5 @@ __pycache__/
 /Alexa/Rodolfo.Alexa/Rodolfo.Alexa.Luis/Properties/PublishProfiles/rodolfoalexa - Web Deploy.pubxml
 /Alexa/Rodolfo.Alexa/Rodolfo.Alexa.Skills/appsettings.Development.json
 /Alexa/Rodolfo.Alexa/Rodolfo.Alexa.Luis/appsettings.Development.json
+/Generic-LUIS/Rodolfo/Rodolfo.LUIS.Cortana/Properties/PublishProfiles/rodolfo-cortana-dev - Web Deploy.pubxml
+/Generic-LUIS/Rodolfo/Rodolfo.LUIS.Cortana/BotConfiguration.bot
